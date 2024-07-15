@@ -1,0 +1,2 @@
+// find matching databases with filter
+db.school.find({name: "Holberton school"})
