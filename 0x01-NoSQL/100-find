@@ -1,0 +1,2 @@
+// using filter formation
+db.school.find({name: {$regex: "^Holberton"}})
