@@ -4,7 +4,7 @@ Module which handles the update part of C.R.U.D operations for mongo collection
 """
 
 
-def update_topics(mongo_collection: object, name: str, topics: list[str]):
+def update_topics(mongo_collection, name: str, topics):
     """
     Parameters:
         mongo_collection: object
