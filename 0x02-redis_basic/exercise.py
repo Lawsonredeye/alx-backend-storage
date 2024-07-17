@@ -7,7 +7,12 @@ connection to an instance
 import redis
 from uuid import uuid4
 import typing
+from functools import wraps
 
+
+# def count_calls(method: callable):
+#     @wraps(method)
+#     def
 
 class Cache:
     """
@@ -36,3 +41,19 @@ class Cache:
         key: str = str(uuid4())
         self._redis.set(key, data)
         return key
+
+    def get(self, key: str, fn: callable = None):
+        get_key = self._redis.get(key)
+        if not get_key:
+            return None
+        if fn:
+            return fn(get_key)
+        return get_key
+
+    def get_str(cls):
+        """Auto parameterize the cache" into str"""
+        return str(cls.get)
+
+    def get_int(cls):
+        """Auto parameterize the cache" into int"""
+        return int(cls.get)
