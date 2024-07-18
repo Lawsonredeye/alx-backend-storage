@@ -10,9 +10,14 @@ import typing
 from functools import wraps
 
 
-# def count_calls(method: callable):
-#     @wraps(method)
-#     def
+def count_calls(method: callable):
+    @wraps(count_calls)
+    def increment(__qualname__):
+        count = 0
+        if __qualname__:
+            count += 1
+            return count
+    return increment
 
 class Cache:
     """
@@ -42,7 +47,7 @@ class Cache:
         self._redis.set(key, data)
         return key
 
-    def get(self, key: str, fn: callable = None):
+    def get(self, key: str, fn: typing.Callable = None):
         get_key = self._redis.get(key)
         if not get_key:
             return None
